@@ -8,6 +8,39 @@
     box-sizing: border-box; /* include margin, border, and padding in size */
     font-family: "Arial Black", sans-serif;
     }
+
+    .topnav {
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav img {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
  
     .flex-container {
     display: -webkit-flex;
@@ -87,11 +120,21 @@
     }
 </style>
 <script>
-    /*hier die Funktionen */
+    var jahreszeiten = ["sommer", "winter", "regen", "baum", "cocktail"];  // Names of the elements
+
+    function mainMenu(jahreszeit) {
+
+        jahreszeiten.forEach(element => {
+            document.getElementById("BT" + element).style = "topnav";
+        });
+
+        document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
+        document.getElementById("TVjahreszeit").textContent = "Person im " + jahreszeit;
+    }
 </script>
 </head>
 <title>GMCI-Shop</title>
-<body>
+<body onload="mainMenu(jahreszeiten[0])">
     <div class="row">
         <div class="flex-container">
             <div class="desktop-3-cols">
@@ -111,7 +154,13 @@
 
             </div>
             <div class="desktop-9-cols">
-                <iframe frameborder="0" class="phone-12-cols" src="main_menu.html"></iframe>
+                <div class="topnav desktop-12-cols">
+                    <a id="BTsommer" onclick="mainMenu(jahreszeiten[0])"><img src="sun.svg"></a>
+                    <a id="BTwinter" onclick="mainMenu(jahreszeiten[1])"><img src="snow.svg"></a>
+                    <a id="BTregen" onclick="mainMenu(jahreszeiten[2])"><img src="rainy.svg"></a>
+                    <a id="BTbaum" onclick="mainMenu(jahreszeiten[3])"><img src="tree.svg"></a>
+                    <a id="BTcocktail" onclick="mainMenu(jahreszeiten[4])"><img src="cocktail.svg"></a>
+                  </div>
             </div>
             <div class="desktop-3-cols">
 
@@ -130,7 +179,7 @@
                   </ul>
             </div>
             <div class="desktop-9-cols">
-                <h1>
+                <h1 id="TVjahreszeit">
                     Hier kann dann die Person eingefügt werden.
                 </h1>
             </div>
