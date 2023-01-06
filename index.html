@@ -129,8 +129,14 @@
         });
 
         document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
-        document.getElementById("TVjahreszeit").textContent = "Person im " + jahreszeit;
-        document.get
+
+        document.getElementById("IVperson").addEventListener("mouseover", function(e) {
+        let bounds = document.getElementById("ROWmain").getBoundingClientRect();
+        let x = e.clientX - bounds.left;
+        let y = e.clientY - bounds.top;
+
+            console.log(x, y);
+        });
     }
 </script>
 </head>
@@ -158,7 +164,7 @@
 
             </div>
             <div class="desktop-9-cols">
-                <div class="topnav desktop-12-cols">
+                <div class="topnav desktop-12-cols" id="ROWmain">
                     <a id="BTsommer" onclick="setJahreszeit(jahreszeiten[0])"><img src="sun.svg"></a>
                     <a id="BTwinter" onclick="setJahreszeit(jahreszeiten[1])"><img src="snow.svg"></a>
                     <a id="BTregen" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg"></a>
@@ -183,10 +189,7 @@
                   </ul>
             </div>
             <div class="desktop-9-cols">
-                <img id="IVperson" src="Winter_colored.png"/>
-                <h1 id="TVjahreszeit">
-                    Hier kann dann die Person eingefügt werden.
-                </h1>
+                <img id="IVperson" src="Sommer_colored.png" onmousemove="onMausUeberDerPerson(event)" onmouseout="mausIstAufDerPerson = false" onmouseenter="mausIstAufDerPerson = true"/>
             </div>
             <div class="desktop-3-cols">
 
