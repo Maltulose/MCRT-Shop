@@ -1,6 +1,9 @@
 var jahreszeiten = ["sommer", "winter", "regen", "baum", "cocktail"];  // Names of the elements
 var mausIstAufDerPerson = false
 var jahreszeit = jahreszeiten[0];
+
+var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png", "baum", "cocktail"];  // Names of the elements
+
 var personenRegenkleidung = ["Regen_Colored_Hut.png", "Regen_Colored_Jacke.png", "Regen_Colored_Stiefel.png"];  // Names of the elements
 
 function setPage(page) {
@@ -9,7 +12,7 @@ function setPage(page) {
 
 function setJahreszeit(jahreszeit) {
     
-    var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png", "baum", "cocktail"];  // Names of the elements
+    
     
 
     
@@ -20,7 +23,7 @@ function setJahreszeit(jahreszeit) {
     document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
 
     jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
-    this.jahreszeit = jahreszeiten[jahreszeit]
+    this.jahreszeit = jahreszeit
 
     document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit];
 
@@ -29,6 +32,7 @@ function setJahreszeit(jahreszeit) {
 }
 
 function onMausUeberDerPerson(e) {
+    console.log("tset")
     if (mausIstAufDerPerson == true) {
         let bounds = document.getElementById("ROWmain").getBoundingClientRect();
         let x = e.clientX - bounds.left;
@@ -42,8 +46,6 @@ function onMausUeberDerPerson(e) {
         let bauch = kopf + pixel * 5.5;
         let fuss = maxHöhe;
 
-        console.log(kopf);
-
 
         if (y < kopf) {
             setAuswahl("_Colored_Hut.png")
@@ -52,11 +54,17 @@ function onMausUeberDerPerson(e) {
         } else {
             setAuswahl("_Colored_Stiefel.png")
         }
+    } else {
+        
+        showBasicPerson()
     }
+}
 
-    function setAuswahl(region) {
-        var test = jahreszeit + region
-        console.log(test)
-        document.getElementById("IVperson").src = jahreszeit + region
-    }
+function setAuswahl(region) {
+    document.getElementById("IVperson").src = jahreszeiten[jahreszeit] + region
+}
+
+function showBasicPerson() {
+    document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit]
+    mausIstAufDerPerson = false
 }
