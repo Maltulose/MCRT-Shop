@@ -136,6 +136,9 @@
 </head>
 <title>GMCI-Shop</title>
 <body onload="mainMenu(jahreszeiten[0])">
+
+    <script src="js/navigation.js"></script>
+
     <div class="row">
         <div class="flex-container">
             <div class="desktop-3-cols">
@@ -156,11 +159,11 @@
             </div>
             <div class="desktop-9-cols">
                 <div class="topnav desktop-12-cols">
-                    <a id="BTsommer" onclick="mainMenu(jahreszeiten[0])"><img src="sun.svg"></a>
-                    <a id="BTwinter" onclick="mainMenu(jahreszeiten[1])"><img src="snow.svg"></a>
-                    <a id="BTregen" onclick="mainMenu(jahreszeiten[2])"><img src="rainy.svg"></a>
-                    <a id="BTbaum" onclick="mainMenu(jahreszeiten[3])"><img src="tree.svg"></a>
-                    <a id="BTcocktail" onclick="mainMenu(jahreszeiten[4])"><img src="cocktail.svg"></a>
+                    <a id="BTsommer" onclick="setJahreszeit(jahreszeiten[0])"><img src="sun.svg"></a>
+                    <a id="BTwinter" onclick="setJahreszeit(jahreszeiten[1])"><img src="snow.svg"></a>
+                    <a id="BTregen" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg"></a>
+                    <a id="BTbaum" onclick="setJahreszeit(jahreszeiten[3])"><img src="tree.svg"></a>
+                    <a id="BTcocktail" onclick="setJahreszeit(jahreszeiten[4])"><img src="cocktail.svg"></a>
                   </div>
             </div>
             <div class="desktop-3-cols">
@@ -180,7 +183,7 @@
                   </ul>
             </div>
             <div class="desktop-9-cols">
-                <img src="Winter_colored.png"/>
+                <img id="IVperson" src="Winter_colored.png"/>
                 <h1 id="TVjahreszeit">
                     Hier kann dann die Person eingefügt werden.
                 </h1>
