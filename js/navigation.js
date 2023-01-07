@@ -7,6 +7,7 @@ var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_C
 var koerperregionenX = ["Links", "Mitte", "Rechts"]
 var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"]
 
+
 function setJahreszeit(jahreszeit) {
     jahreszeiten.forEach(element => {
         document.getElementById("BT" + element).style = "topnav";
@@ -178,4 +179,8 @@ function showBasicPerson() {
 
     document.getElementById("IVperson").src = pfad
     mausIstAufDerPerson = false
+}
+
+function onMouseClick() {
+    
 }
