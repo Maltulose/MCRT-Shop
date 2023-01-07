@@ -1,8 +1,8 @@
-var jahreszeiten = ["sommer", "winter", "regen", "baum", "cocktail"];  // Names of the elements
+var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
 var mausIstAufDerPerson = false
 var jahreszeit = jahreszeiten[0];
 
-var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png", "baum", "cocktail"];  // Names of the elements
+var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Names of the elements
 
 var personenRegenkleidung = ["Regen_Colored_Hut.png", "Regen_Colored_Jacke.png", "Regen_Colored_Stiefel.png"];  // Names of the elements
 
@@ -11,12 +11,6 @@ function setPage(page) {
 }
 
 function setJahreszeit(jahreszeit) {
-    
-    
-    
-
-    
-
     jahreszeiten.forEach(element => {
         document.getElementById("BT" + element).style = "topnav";
     });
@@ -25,14 +19,13 @@ function setJahreszeit(jahreszeit) {
     jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
     this.jahreszeit = jahreszeit
 
-    document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit];
-
+    //document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit];
+    showBasicPerson()
     console.log(personenJahreszeiten[jahreszeiten.findIndex(element => element == jahreszeit)])
 
 }
 
 function onMausUeberDerPerson(e) {
-    console.log("tset")
     if (mausIstAufDerPerson == true) {
         let bounds = document.getElementById("ROWmain").getBoundingClientRect();
         let x = e.clientX - bounds.left;
@@ -55,16 +48,21 @@ function onMausUeberDerPerson(e) {
             setAuswahl("_Colored_Stiefel.png")
         }
     } else {
-        
         showBasicPerson()
     }
 }
 
 function setAuswahl(region) {
-    document.getElementById("IVperson").src = jahreszeiten[jahreszeit] + region
+    var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + jahreszeiten[jahreszeit] + region
+
+    document.getElementById("IVperson").src = pfad
 }
 
 function showBasicPerson() {
-    document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit]
+    var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit]
+
+    console.log(pfad)
+
+    document.getElementById("IVperson").src = pfad
     mausIstAufDerPerson = false
 }
