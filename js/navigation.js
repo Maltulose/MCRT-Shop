@@ -4,9 +4,8 @@ var jahreszeit = 0;
 
 var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Names of the elements
 
-var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"]
 var koerperregionenX = ["Links", "Mitte", "Rechts"]
-
+var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"]
 
 function setJahreszeit(jahreszeit) {
     jahreszeiten.forEach(element => {
@@ -14,13 +13,9 @@ function setJahreszeit(jahreszeit) {
     });
     document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
 
-    jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
-    this.jahreszeit = jahreszeit
+    this.jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
 
-    //document.getElementById("IVperson").src = personenJahreszeiten[jahreszeit];
     showBasicPerson()
-    console.log(personenJahreszeiten[jahreszeiten.findIndex(element => element == jahreszeit)])
-
 }
 
 function onMausUeberDerPerson(e) {
@@ -33,71 +28,67 @@ function onMausUeberDerPerson(e) {
         let maxHöhe = document.getElementById("IVperson").offsetHeight;
         let maxBreite = document.getElementById("IVperson").offsetWidth;
 
-
-        let pixel = maxHöhe / 20;
-        let breite = maxBreite / 3;
+        let hoehenEinheit = maxHöhe / 20;
+        let breitenEinheit = maxBreite / 3;
         var koerperX, koerperY;
 
-        if (x < breite) {
+        if (x < breitenEinheit) {
             koerperX = koerperregionenX[0];
-        } else if (x < breite * 1.7) {
+        } else if (x < breitenEinheit * 1.7) {
             koerperX = koerperregionenX[1];
         } else {
             koerperX = koerperregionenX[2];
         }
 
-
-
+        //switch-case für die verschiedenden Kleidungslängen bei den
+        //verschiedenden Jahreszeiten
         switch (this.jahreszeit) {
             case 0:
-                if (y < pixel * 3) {
+                if (y < hoehenEinheit * 3) {
                     koerperY = koerperregionenY[0];
-                } else if (y < pixel * 6) {
+                } else if (y < hoehenEinheit * 6) {
                     koerperY = koerperregionenY[1];
-                } else if (y < pixel * 7) {
+                } else if (y < hoehenEinheit * 7) {
                     koerperY = koerperregionenY[2];
-                } else if (y < pixel * 12) {
+                } else if (y < hoehenEinheit * 12) {
                     koerperY = koerperregionenY[3];
-                } else if (y < pixel * 18) {
+                } else if (y < hoehenEinheit * 18) {
                     koerperY = koerperregionenY[4];
                 } else {
                     koerperY = koerperregionenY[5];
                 }
                 break;
             case 1:
-                if (y < pixel * 3) {
+                if (y < hoehenEinheit * 3) {
                     koerperY = koerperregionenY[0];
-                } else if (y < pixel * 6) {
+                } else if (y < hoehenEinheit * 6) {
                     koerperY = koerperregionenY[1];
-                } else if (y < pixel * 8) {
+                } else if (y < hoehenEinheit * 8) {
                     koerperY = koerperregionenY[2];
-                } else if (y < pixel * 13) {
+                } else if (y < hoehenEinheit * 13) {
                     koerperY = koerperregionenY[3];
-                } else if (y < pixel * 18) {
+                } else if (y < hoehenEinheit * 18) {
                     koerperY = koerperregionenY[4];
                 } else {
                     koerperY = koerperregionenY[5];
                 }
                 break;
-        
             default:
-                if (y < pixel * 3) {
+                if (y < hoehenEinheit * 3) {
                     koerperY = koerperregionenY[0];
-                } else if (y < pixel * 6) {
+                } else if (y < hoehenEinheit * 6) {
                     koerperY = koerperregionenY[1];
-                } else if (y < pixel * 7) {
+                } else if (y < hoehenEinheit * 7) {
                     koerperY = koerperregionenY[2];
-                } else if (y < pixel * 15) {
+                } else if (y < hoehenEinheit * 15) {
                     koerperY = koerperregionenY[3];
-                } else if (y < pixel * 18) {
+                } else if (y < hoehenEinheit * 18) {
                     koerperY = koerperregionenY[4];
                 } else {
                     koerperY = koerperregionenY[5];
                 }
                 break;
         }
-
-        
 
         var bild = getPictureName(koerperX, koerperY);
         setAuswahl(bild)
@@ -134,7 +125,6 @@ function getPictureName(xKoordinate, yKoordinate) {
                 case koerperregionenY[2]:
                     return jahreszeiten[jahreszeit] + "_Colored_Schal.png"
                 case koerperregionenY[3]:
-                    
                     return jahreszeiten[jahreszeit] + "_Colored_Jacke.png"
                 case koerperregionenY[4]:
                     if (xKoordinate == koerperregionenX[0] || xKoordinate == koerperregionenX[2]) {

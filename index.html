@@ -120,23 +120,10 @@
     }
 </style>
 <script>
-    var jahreszeiten = ["sommer", "winter", "regen", "baum", "cocktail"];  // Names of the elements
+    var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
 
     function mainMenu(jahreszeit) {
-
-        jahreszeiten.forEach(element => {
-            document.getElementById("BT" + element).style = "topnav";
-        });
-
         document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
-
-        document.getElementById("IVperson").addEventListener("mouseover", function(e) {
-        let bounds = document.getElementById("ROWmain").getBoundingClientRect();
-        let x = e.clientX - bounds.left;
-        let y = e.clientY - bounds.top;
-
-            //console.log(x, y);
-        });
     }
 </script>
 </head>
@@ -157,7 +144,6 @@
                 <img src="einkaufswagen.svg" style="float: right; height: 100%;">
             </div>
         </div>
-
 
         <div class="flex-container">
             <div class="desktop-3-cols">
@@ -193,17 +179,9 @@
 
             </div>
         </div>
-        
-          
-
         <div class="col-12 footer">
             <p>Footer, impressum and more.</p>
         </div>
-
-        
     </div>
-
-    
-
 </body>
 </html>
