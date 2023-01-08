@@ -181,6 +181,11 @@ function showBasicPerson() {
     mausIstAufDerPerson = false
 }
 
-function onMouseClick() {
-    
+function openDetailansicht(){
+    window.location = "detailansicht.html";
+}
+
+function openIndex(){
+    console.log("Test");
+    window.location = "index.html";
 }
