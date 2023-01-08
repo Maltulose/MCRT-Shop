@@ -20,8 +20,9 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  margin-left: 6px;
+  margin-top: 6px
 }
-
 
 .topnav img {
   float: left;
@@ -55,6 +56,50 @@
         display: table;  
     }
 
+    .logo {
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 3px solid #4f99df;
+    margin-top: 6px;
+    }
+
+    .logo img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 5px;
+    align-items: left;
+    }
+
+    .centerBox {
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-top: 3px solid #4f99df;
+    border-bottom: 3px solid #4f99df;
+    margin-top: 6px;
+    }
+
+    .shoppingCart {
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 3px solid #4f99df;
+    margin-top: 6px;
+    }
+
+    .leftBox {
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-left: 3px solid #4f99df;
+    border-right: 3px solid #4f99df;
+    }
+
     img {
     max-width: 100%;
     max-height: 100%;
@@ -62,41 +107,13 @@
     align-items: left;
     }
 
-    .header {
-    font-size: 36pt;
-    font-weight: bold;
-    background-color: #f1f1f1;
-    color: #00519e;
-    padding: 15px;
-    display: -webkit-flex; /* Safari */
-    -webkit-justify-content: center; /* Safari 6.1+ */
-    display: flex;
-    justify-content: left;
-	text-align: justify;
-    }
-
-    .logo {
-    font-size: 30pt;
-    font-weight: bold;
-    font-family: Courier New;
-    color: #4f99df;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
-    display: -webkit-flex; /* Safari */
-    -webkit-justify-content: center; /* Safari 6.1+ */
-    display: flex;
-    border: 3px solid #4f99df;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    }
-
     .footer {
-        background-color: #f1f1f1;
+        background-color: white;
         color: #00519e;
         text-align: center;
         font-size: 10pt;
         padding: 15px;
+        border-top: 3px solid #4f99df;
      }
     
      /* For mobile phones: */
@@ -136,19 +153,19 @@
 
     <div class="row">
         <div class="flex-container">
-            <div class="desktop-3-cols">
+            <div class="desktop-2-cols logo">
                 <img src="logo.png" onmouseup="openIndex()"/>
             </div>
-            <div class="desktop-6-cols logo">
-                <h1>MCRT</h1>
+            <div class="desktop-9-cols centerBox">
+                
             </div>
-            <div class="desktop-3-cols">
+            <div class="desktop-1-cols shoppingCart">
                 <img src="einkaufswagen.svg" style="float: right; height: 100%;">
             </div>
         </div>
 
         <div class="flex-container">
-            <div class="desktop-3-cols">
+            <div class="desktop-2-cols leftBox">
 
             </div>
             <div class="desktop-9-cols">
@@ -158,16 +175,16 @@
                     <a id="BTregen" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg"></a>
                   </div>
             </div>
-            <div class="desktop-3-cols">
+            <div class="desktop-1-cols">
 
             </div>
         </div>
 
         <div class="flex-container">
-            <div class="desktop-3-cols">
+            <div class="desktop-2-cols leftBox">
                 
             </div>
-            <div class="desktop-3-cols">
+            <div class="desktop-3-cols img">
                 <img id="IVperson" src="\pictures\regen\regen_Colored_1.png" onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true"/>
             </div>
             <div class="desktop-6-cols"> 
@@ -175,7 +192,7 @@
             </div>
         </div>
         <div class="col-12 footer">
-            <p>Footer, impressum and more.</p>
+            <p>C. Hagemeyer, R. Gieseke, M. Herrmann, T. Schockemöhle</p>
         </div>
     </div>
 </body>
