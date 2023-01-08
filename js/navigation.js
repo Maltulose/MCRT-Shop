@@ -186,6 +186,53 @@ function openDetailansicht(){
 }
 
 function openIndex(){
-    console.log("Test");
     window.location = "index.html";
+}
+
+function FindPosition(oElement)
+{
+  if(typeof( oElement.offsetParent ) != "undefined")
+  {
+    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    {
+      posX += oElement.offsetLeft;
+      posY += oElement.offsetTop;
+    }
+      return [ posX, posY ];
+    }
+    else
+    {
+      return [ oElement.x, oElement.y ];
+    }
+}
+
+function GetCoordinates(e)
+{
+  var Pos = [0,0];
+  var ImgPos;
+  ImgPos = FindPosition(SaleAuswahl);
+  if (!e) var e = window.event;
+  if (e.pageX || e.pageY)
+  {
+    Pos[0] = e.pageX;
+    Pos[1] = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+    {
+      Pos[0] = e.clientX + document.body.scrollLeft
+        + document.documentElement.scrollLeft;
+      Pos[1] = e.clientY + document.body.scrollTop
+        + document.documentElement.scrollTop;
+    }
+  Pos[0] = Pos[0] - ImgPos[0];
+  Pos[1] = Pos[1] - ImgPos[1];
+  return Pos
+}
+
+function saleAuswahl(e) {
+    var Pos;
+    Pos = GetCoordinates(e);
+    if ((540 < Pos[0] < 730) && (240 < Pos[1] < 370)) {
+        document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png"
+    }
 }
