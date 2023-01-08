@@ -236,7 +236,7 @@ function GetCoordinates(e)
 function saleAuswahl(e) {
     var Pos;
     Pos = GetCoordinates(e);
-    if ((540 < Pos[0] < 730) && (240 < Pos[1] < 370)) {
+    if ((540 < Pos[0]  && Pos[0] < 730) && (240 < Pos[1] && Pos[1]< 370)) {
         this.lilaJacke = true;
         document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png"
     }
