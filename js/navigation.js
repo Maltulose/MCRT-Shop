@@ -1,6 +1,7 @@
 var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
 var mausIstAufDerPerson = false
 var jahreszeit = 0;
+var lilaJacke = false; //verhindert, dass lila Jacke durch Mouseover verändert wird
 
 var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Names of the elements
 
@@ -9,6 +10,7 @@ var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "
 
 
 function setJahreszeit(jahreszeit) {
+    this.lilaJacke = false;
     jahreszeiten.forEach(element => {
         document.getElementById("BT" + element).style = "topnav";
     });
@@ -20,7 +22,7 @@ function setJahreszeit(jahreszeit) {
 }
 
 function onMausUeberDerPerson(e) {
-    if (mausIstAufDerPerson == true) {
+    if (mausIstAufDerPerson == true && this.lilaJacke == false) {
         let bounds = document.getElementById("ROWmain").getBoundingClientRect();
         let x = e.clientX - bounds.left;
         let y = e.clientY - bounds.top - document.getElementById("ROWmain").offsetHeight;
@@ -175,10 +177,12 @@ function setAuswahl(region) {
 }
 
 function showBasicPerson() {
-    var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit]
+    if (this.lilaJacke == false) {
+        var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit]
 
-    document.getElementById("IVperson").src = pfad
-    mausIstAufDerPerson = false
+        document.getElementById("IVperson").src = pfad
+        mausIstAufDerPerson = false
+    }  
 }
 
 function openDetailansicht(){
@@ -233,6 +237,7 @@ function saleAuswahl(e) {
     var Pos;
     Pos = GetCoordinates(e);
     if ((540 < Pos[0] < 730) && (240 < Pos[1] < 370)) {
+        this.lilaJacke = true;
         document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png"
     }
 }
