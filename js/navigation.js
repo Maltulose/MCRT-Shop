@@ -196,18 +196,18 @@ function showBasicPerson() {
     }  
 }
 
+// Funktionen zum aufrufen der anderen Seiten
 function openDetailansicht(){
     window.location = "detailansicht.html";
 }
-
 function openIndex(){
     window.location = "index.html";
 }
-
 function openShoppingCart() {
     window.location = "shopping_cart.html";
 }
 
+// hinzufügen eines Artikels zum Warenkorb
 function addToCart(name) {
     currentItems = sessionStorage.getItem("itemsInCart");
     if(currentItems != null) {
@@ -234,6 +234,7 @@ function FindPosition(oElement) {
     }
 }
 
+// Koordinaten im Element/Bild  
 function GetCoordinates(e) {
   var Pos = [0,0];
   var ImgPos;
@@ -243,12 +244,14 @@ function GetCoordinates(e) {
   return Pos;
 }
 
+// Auswahl in der Detailansicht
 function saleAuswahl(e) {
     console.log(this.imAuswahlFenster);
     var img_width = document.getElementById("SaleAuswahl").clientWidth;
     var img_height = document.getElementById("SaleAuswahl").clientHeight;
     var Pos;
     Pos = GetCoordinates(e);
+    // Auswahl vom Artikel (Hier bisher nur lila Jacke)
     if (this.imAuswahlFenster==true){
         var Pos_lilaJacke = [533, 723, 232, 368];
         var img_lilaJacke = [800, 600];
@@ -260,7 +263,7 @@ function saleAuswahl(e) {
             document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Colored_lila_Jacke.png";
             this.imAuswahlFenster=false;
         }
-    } else {
+    } else { // Warenkorb "Button"
         var Pos_shoppingCart = [345, 545, 508, 555];
         var sale_img = [604, 600];
         img_width = img_width/sale_img[0];
