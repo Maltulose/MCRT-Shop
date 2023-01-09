@@ -171,17 +171,17 @@ function getPictureName(xKoordinate, yKoordinate) {
 }
 
 function setAuswahl(region) {
-    var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + region
+    var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + region;
 
-    document.getElementById("IVperson").src = pfad
+    document.getElementById("IVperson").src = pfad;
 }
 
 function showBasicPerson() {
     if (this.lilaJacke == false) {
-        var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit]
+        var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit];
 
-        document.getElementById("IVperson").src = pfad
-        mausIstAufDerPerson = false
+        document.getElementById("IVperson").src = pfad;
+        mausIstAufDerPerson = false;
     }  
 }
 
@@ -193,8 +193,8 @@ function openIndex(){
     window.location = "index.html";
 }
 
-function FindPosition(oElement)
-{
+// Position eines Elements auf der Seite
+function FindPosition(oElement) {
   if(typeof( oElement.offsetParent ) != "undefined")
   {
     for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
@@ -210,34 +210,26 @@ function FindPosition(oElement)
     }
 }
 
-function GetCoordinates(e)
-{
+
+function GetCoordinates(e) {
   var Pos = [0,0];
   var ImgPos;
-  ImgPos = FindPosition(SaleAuswahl);
-  if (!e) var e = window.event;
-  if (e.pageX || e.pageY)
-  {
-    Pos[0] = e.pageX;
-    Pos[1] = e.pageY;
-  }
-  else if (e.clientX || e.clientY)
-    {
-      Pos[0] = e.clientX + document.body.scrollLeft
-        + document.documentElement.scrollLeft;
-      Pos[1] = e.clientY + document.body.scrollTop
-        + document.documentElement.scrollTop;
-    }
-  Pos[0] = Pos[0] - ImgPos[0];
-  Pos[1] = Pos[1] - ImgPos[1];
-  return Pos
+  ImgPos = FindPosition(document.getElementById("SaleAuswahl"));  
+  Pos[0] = e.pageX - ImgPos[0];
+  Pos[1] = e.pageY - ImgPos[1];
+  return Pos;
 }
 
 function saleAuswahl(e) {
+    var img_width = document.getElementById("SaleAuswahl").clientWidth/800;
+    var img_height = document.getElementById("SaleAuswahl").clientHeight/600;
     var Pos;
+    var Pos_lilaJacke = [533, 723, 232, 368];
     Pos = GetCoordinates(e);
-    if ((540 < Pos[0]  && Pos[0] < 730) && (240 < Pos[1] && Pos[1]< 370)) {
+
+    if ((Pos_lilaJacke[0]*img_width < Pos[0]) && (Pos[0] < Pos_lilaJacke[1]*img_width) && (Pos_lilaJacke[2]*img_height < Pos[1]) && (Pos[1]< Pos_lilaJacke[3]*img_height)) {
         this.lilaJacke = true;
-        document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png"
+        document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png";
     }
+    
 }
