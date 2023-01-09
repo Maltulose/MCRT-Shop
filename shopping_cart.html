@@ -21,9 +21,8 @@
   text-decoration: none;
   font-size: 17px;
   margin-left: 6px;
-  margin-top: 6px;
+  margin-top: 6px
 }
-
 
 .topnav img {
   float: left;
@@ -103,8 +102,8 @@
 
     img {
     max-width: 100%;
-    max-height: 100%;    
-    padding-bottom: 15px;
+    max-height: 100%;
+    padding: 5px;
     align-items: left;
     }
 
@@ -138,15 +137,62 @@
     }
 </style>
 <script>
-    var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
+function populateShoppingCart() {
+    var data = sessionStorage.getItem("itemsInCart");
+    var table = document.getElementById("content_table");
+    if (data != null) {
+        var total_price = 0;
+        data = data.split(";");
+        var header = table.createTHead();
+        var row = header.insertRow();
+        row.style = "border-top-width: 0px; border-right-width: 0px !important; border-bottom-width: 5px; border-left-width: 0px !important; border-style: solid;";
+        var quantity = row.insertCell();
+        quantity.innerHTML = "Anzahl";
+        var listing_name = row.insertCell();
+        listing_name.innerHTML = "Name des Objekts";
+        listing_name.style = "width: 600px; text-align:center";
+        var price = row.insertCell();
+        price.innerHTML = "Preis";
 
-    function mainMenu(jahreszeit) {
-        document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
+        table.style = "padding: 20px; border-collapse: collapse; margin-top: 20px !important;";
+        data.forEach(element => {
+            var row = table.insertRow();
+            row.style = "border-top-width: 1px; border-right-width: 0px !important; border-bottom-width: 1px; border-left-width: 0px !important; border-style: solid;";
+            quantity = row.insertCell();
+            quantity.innerHTML = "1";
+            listing_name = row.insertCell();
+            listing_name.innerHTML = element;
+            listing_name.style = "width: 600px; text-align:center";
+            price = row.insertCell();
+            price.innerHTML = "100€";
+            total_price += 100;
+            price.style = "text-align: left";
+        });
+        row = table.insertRow();
+        row.insertCell();
+        row.insertCell();
+        total = row.insertCell();
+        total.innerHTML = total_price + "€";
+        table.rows[table.rows.length - 1].style = "border-top-width: 5px; border-right-width: 0px !important; border-bottom-width: 0px; border-left-width: 0px !important; border-style: solid;";
+
+        document.getElementById("buy_button").style = "margin-top: 25px !important; margin-bottom: 10px !important; font-size: 20px;"
+    } else {
+        var listing = document.getElementById("cart_contents");
+        listing.innerHTML = "Keine Artikel im Einkaufswagen";
     }
+}
+
+function placeOrder() {
+    alert("Ihre Bestellung wurde aufgegeben. Ihre Trackingnummer lautet: XXXXXXXXXX")
+    sessionStorage.removeItem("itemsInCart");
+    populateShoppingCart();
+    document.getElementById("buy_button").style = "display:none";
+}
 </script>
+
 </head>
 <title>GMCI-Shop</title>
-<body onload="mainMenu(jahreszeiten[0])">
+<body onload="populateShoppingCart()">
 
     <script src="js/navigation.js"></script>
 
@@ -159,36 +205,15 @@
                 
             </div>
             <div class="desktop-1-cols shoppingCart">
-                <img src="einkaufswagen.svg" style="float: right; height: 100%;" onmouseup="openShoppingCart()">
+                <img src="einkaufswagen.svg" style="float: right; height: 100%;">
             </div>
         </div>
 
-        <div class="flex-container">
-            <div class="desktop-2-cols leftBox">
-
+        <div class="flex-container" style="align-items: center; justify-content: center;">
+            <div class="desktop-12-cols" id="cart_contents" style="align-items: center; justify-content: center; display:flex;">
+                <table id="content_table"></table>
             </div>
-            <div class="desktop-9-cols">
-                <div class="topnav desktop-12-cols" id="ROWmain">
-                    <a id="BTsommer" onclick="setJahreszeit(jahreszeiten[0])"><img src="sun.svg"></a>
-                    <a id="BTwinter" onclick="setJahreszeit(jahreszeiten[1])"><img src="snow.svg"></a>
-                    <a id="BTregen" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg"></a>
-                  </div>
-            </div>
-            <div class="desktop-1-cols">
-
-            </div>
-        </div>
-
-        <div class="flex-container">
-            <div class="desktop-2-cols leftBox">
-                
-            </div>
-            <div class="desktop-9-cols img">
-                <img id="IVperson" src="pictures/sommer/Sommer_colored.png" onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true" onmouseup="openDetailansicht()"/>
-            </div>
-            <div class="desktop-3-cols">
-
-            </div>
+            <button onclick="placeOrder()" style="display:none" id="buy_button">Kaufen</button>
         </div>
         <div class="col-12 footer">
             <p>C. Hagemeyer, R. Gieseke, M. Herrmann, T. Schockemöhle</p>

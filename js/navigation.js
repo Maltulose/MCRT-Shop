@@ -193,6 +193,19 @@ function openIndex(){
     window.location = "index.html";
 }
 
+function openShoppingCart() {
+    window.location = "shopping_cart.html";
+}
+
+function addToCart(name) {
+    currentItems = sessionStorage.getItem("itemsInCart");
+    if(currentItems != null) {
+        sessionStorage.setItem("itemsInCart", currentItems + ";" + name);
+    } else {
+        sessionStorage.setItem("itemsInCart", name);
+    }
+}
+
 // Position eines Elements auf der Seite
 function FindPosition(oElement) {
   if(typeof( oElement.offsetParent ) != "undefined")
