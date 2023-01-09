@@ -2,7 +2,7 @@ var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
 var mausIstAufDerPerson = false
 var jahreszeit = 0;
 var lilaJacke = false; //verhindert, dass lila Jacke durch Mouseover verändert wird
-
+var imAuswahlFenster = true;
 var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Names of the elements
 
 var koerperregionenX = ["Links", "Mitte", "Rechts"]
@@ -223,7 +223,6 @@ function FindPosition(oElement) {
     }
 }
 
-
 function GetCoordinates(e) {
   var Pos = [0,0];
   var ImgPos;
@@ -234,15 +233,33 @@ function GetCoordinates(e) {
 }
 
 function saleAuswahl(e) {
-    var img_width = document.getElementById("SaleAuswahl").clientWidth/800;
-    var img_height = document.getElementById("SaleAuswahl").clientHeight/600;
+    console.log(this.imAuswahlFenster);
+    var img_width = document.getElementById("SaleAuswahl").clientWidth;
+    var img_height = document.getElementById("SaleAuswahl").clientHeight;
     var Pos;
-    var Pos_lilaJacke = [533, 723, 232, 368];
     Pos = GetCoordinates(e);
-
-    if ((Pos_lilaJacke[0]*img_width < Pos[0]) && (Pos[0] < Pos_lilaJacke[1]*img_width) && (Pos_lilaJacke[2]*img_height < Pos[1]) && (Pos[1]< Pos_lilaJacke[3]*img_height)) {
-        this.lilaJacke = true;
-        document.getElementById("IVperson").src = "/pictures/regen/regen_Colored_lila_Jacke_mit_grau.png";
+    if (this.imAuswahlFenster==true){
+        var Pos_lilaJacke = [533, 723, 232, 368];
+        var img_lilaJacke = [800, 600];
+        img_width = img_width/img_lilaJacke[0];
+        img_height = img_height/img_lilaJacke[1];
+        if ((Pos_lilaJacke[0]*img_width < Pos[0]) && (Pos[0] < Pos_lilaJacke[1]*img_width) && (Pos_lilaJacke[2]*img_height < Pos[1]) && (Pos[1]< Pos_lilaJacke[3]*img_height)) {
+            this.lilaJacke = true;
+            document.getElementById("IVperson").src = "pictures/regen/regen_Colored_lila_Jacke_mit_grau.png";
+            document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Colored_lila_Jacke.png";
+            this.imAuswahlFenster=false;
+        }
+    } else {
+        var Pos_shoppingCart = [345, 545, 508, 555];
+        var sale_img = [604, 600];
+        img_width = img_width/sale_img[0];
+        img_height = img_height/sale_img[1];
+        if ((Pos_shoppingCart[0]*img_width < Pos[0]) && (Pos[0] < Pos_shoppingCart[1]*img_width) && (Pos_shoppingCart[2]*img_height < Pos[1]) && (Pos[1]< Pos_shoppingCart[3]*img_height)) {
+            document.getElementById("SaleAuswahl").src = "pictures/sale/sale_finished.png";
+            addToCart("Regenjacke lila");
+        }
     }
+    
+
     
 }
