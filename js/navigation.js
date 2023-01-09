@@ -1,40 +1,47 @@
-var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
-var mausIstAufDerPerson = false
-var jahreszeit = 0;
+var jahreszeiten = ["sommer", "winter", "regen"];  // Alle 3 Verfügbaren Jahreszeiten
+var mausIstAufDerPerson = false // Tracking, ob sich der Mauszeiger über der Person befindet. Wenn dies nicht der Fall ist, so soll die Standard-Figur angezeigt werden
+var jahreszeit = 0; // 0 - 2 möglich; siehe var jahreszeiten
 var lilaJacke = false; //verhindert, dass lila Jacke durch Mouseover verändert wird
 var imAuswahlFenster = true;
-var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Names of the elements
+var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Grundbilder von der Person
 
-var koerperregionenX = ["Links", "Mitte", "Rechts"]
-var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"]
+var koerperregionenX = ["Links", "Mitte", "Rechts"] //Koordinatenfeld über die Person in X-Richtung
+var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"] //Koordinatenfeld über die Person in Y-Richtung
 
 
+// Setzt die aktuelle Jahreszeit für die entsrepchende Kleiderauswahl
+// input: jahreszeit: int im Bereich von LEN(jahreszeiten)
 function setJahreszeit(jahreszeit) {
     this.lilaJacke = false;
+    //Auswahlmenü Reseten
     jahreszeiten.forEach(element => {
         document.getElementById("BT" + element).style = "topnav";
     });
     document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
 
     this.jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
-
+    // Grundbild der entsprechenden Person anzeigen
     showBasicPerson()
 }
 
+// Wertet die aktuelle Mausposition über der Figur aus
 function onMausUeberDerPerson(e) {
     if (mausIstAufDerPerson == true && this.lilaJacke == false) {
+        // Von der absoluten X-Y-Koordinate in ein relatives Koodinatensystem umrechnen, welches oben links im Bild die Werte {0,0} besitzt
         let bounds = document.getElementById("ROWmain").getBoundingClientRect();
         let x = e.clientX - bounds.left;
         let y = e.clientY - bounds.top - document.getElementById("ROWmain").offsetHeight;
 
-
+        //Höhe und Breite des Bildes bestimmen
         let maxHöhe = document.getElementById("IVperson").offsetHeight;
         let maxBreite = document.getElementById("IVperson").offsetWidth;
 
+        // Maßeinheiten für das Bild setzen
         let hoehenEinheit = maxHöhe / 20;
         let breitenEinheit = maxBreite / 3;
         var koerperX, koerperY;
 
+        
         if (x < breitenEinheit) {
             koerperX = koerperregionenX[0];
         } else if (x < breitenEinheit * 1.7) {
@@ -43,8 +50,8 @@ function onMausUeberDerPerson(e) {
             koerperX = koerperregionenX[2];
         }
 
-        //switch-case für die verschiedenden Kleidungslängen bei den
-        //verschiedenden Jahreszeiten
+        // koeperY auf den Bereich setzen, wo sich die Maus befindet
+        //switch-case für die verschiedenden Kleidungslängen bei den verschiedenden Jahreszeiten
         switch (this.jahreszeit) {
             case 0:
                 if (y < hoehenEinheit * 3) {
@@ -100,6 +107,8 @@ function onMausUeberDerPerson(e) {
     }
 }
 
+// Ermittelt aus den relativen Kooridnaten von dem Bild, wo sich die Maus befindet das dazugehörige Bild
+//switch-case für die verschiedenden Kleidungslängen bei den verschiedenden Jahreszeiten
 function getPictureName(xKoordinate, yKoordinate) {
     switch (this.jahreszeit) {
         case 0:
@@ -130,6 +139,7 @@ function getPictureName(xKoordinate, yKoordinate) {
                 case koerperregionenY[3]:
                     return jahreszeiten[jahreszeit] + "_Colored_Jacke.png"
                 case koerperregionenY[4]:
+                    // Wenn sich die Maus Links oder Rechts befindet, so werden die Handschuhe ausgewählt und nicht die Jacke
                     if (xKoordinate == koerperregionenX[0] || xKoordinate == koerperregionenX[2]) {
                         return jahreszeiten[jahreszeit] + "_Colored_Handschuhe.png"
                     }
@@ -170,12 +180,13 @@ function getPictureName(xKoordinate, yKoordinate) {
     }
 }
 
+// Zeigt das gegebende Bild mit der passenden Jahreszeit an
 function setAuswahl(region) {
     var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + region;
-
     document.getElementById("IVperson").src = pfad;
 }
 
+// Zeigt die Grundfigur im Image-View an
 function showBasicPerson() {
     if (this.lilaJacke == false) {
         var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + personenJahreszeiten[jahreszeit];
