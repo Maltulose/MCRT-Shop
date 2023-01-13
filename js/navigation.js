@@ -184,6 +184,8 @@ function getPictureName(xKoordinate, yKoordinate) {
 function setAuswahl(region) {
     var pfad = "pictures/" + jahreszeiten[jahreszeit] + "/" + region;
     document.getElementById("IVperson").src = pfad;
+    document.getElementById("IVperson").alt = "type of Clothing";
+    document.getElementById("IVperson").title = "Wähle eine Kategorie aus.";
 }
 
 // Zeigt die Grundfigur im Image-View an

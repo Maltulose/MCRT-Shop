@@ -153,13 +153,13 @@
     <div class="row">
         <div class="flex-container">
             <div class="desktop-2-cols logo">
-                <img src="logo.png" onmouseup="openIndex()"/>
+                <img src="logo.png" alt="Bild vom Logo der Webseite, führt zurück zur Startseite" title="Startseite" tabindex=0 onkeypress="openIndex()" onmouseup="openIndex()"/>
             </div>
             <div class="desktop-9-cols centerBox">
                 
             </div>
             <div class="desktop-1-cols shoppingCart">
-                <img src="einkaufswagen.svg" style="float: right; height: 100%;" onmouseup="openShoppingCart()">
+                <img src="einkaufswagen.svg" alt="Bild von einem Einkaufswagen, öffnet den Warenkorb" title="Einkaufswagen" style="float: right; height: 100%;" tabindex=0 onkeypress="openShoppingCart()" onmouseup="openShoppingCart()">
             </div>
         </div>
 
@@ -169,9 +169,9 @@
             </div>
             <div class="desktop-9-cols">
                 <div class="topnav desktop-12-cols" id="ROWmain">
-                    <a id="BTsommer" onclick="setJahreszeit(jahreszeiten[0])"><img src="sun.svg"></a>
-                    <a id="BTwinter" onclick="setJahreszeit(jahreszeiten[1])"><img src="snow.svg"></a>
-                    <a id="BTregen" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg"></a>
+                    <a id="BTsommer" tabindex=0 onkeypress="setJahreszeit(jahreszeiten[0])" onclick="setJahreszeit(jahreszeiten[0])"><img src="sun.svg" alt="Bild einer Sonne, zeigt Sommerkleidung an" title="Sommerkleidung"></a>
+                    <a id="BTwinter" tabindex=0 onkeypress="setJahreszeit(jahreszeiten[1])" onclick="setJahreszeit(jahreszeiten[1])"><img src="snow.svg" alt="Bild einer Schneeflocke, zeigt Winterkleidung an" title="Winterkleidung"></a>
+                    <a id="BTregen" tabindex=0 onkeypress="setJahreszeit(jahreszeiten[2])" onclick="setJahreszeit(jahreszeiten[2])"><img src="rainy.svg" alt="Bild einer Regenwolke, zeigt Regenkleidung an" title="Regenkleidung"></a>
                   </div>
             </div>
             <div class="desktop-1-cols">
@@ -184,7 +184,7 @@
                 
             </div>
             <div class="desktop-9-cols img">
-                <img id="IVperson" src="pictures/sommer/Sommer_colored.png" onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true" onmouseup="openDetailansicht()"/>
+                <img id="IVperson" src="pictures/sommer/Sommer_colored.png" alt="Bild einer Person, die Sommerkleidung trägt. Zu sehen ist eine Schirmmütze, eine Sonnenbrille, ein T-Shirt, eine kurze Hose und Flipflops. Durch klicken auf das jeweilige Objekt wird eine Auswahl diesen Typs angezeigt." title="Wähle durch Klicken einen Typ von Kleidung aus." onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true" onmouseup="openDetailansicht()"/>
             </div>
             <div class="desktop-3-cols">
 
