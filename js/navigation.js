@@ -9,28 +9,21 @@ var koerperregionenX = ["Links", "Mitte", "Rechts"] //Koordinatenfeld über die 
 var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "Schuhe"] //Koordinatenfeld über die Person in Y-Richtung
 
 
-// Setzt die aktuelle Jahreszeit für die entsrepchende Kleiderauswahl
+
+
+// Setzt die aktuelle Jahreszeit für die entsprechende Kleiderauswahl und geht zurück zur Hauptseite
 // input: jahreszeit: int im Bereich von LEN(jahreszeiten)
-
-
 function setJahreszeitAndGoToMainPage(jahreszeit) {
     //Nur dann in eine andere Jahreszeit springen, wenn sie nicht gleich der aktuellen Jahreszeit ist.
     if (jahreszeiten[this.jahreszeit] != jahreszeit) {
-
-        currentItems = sessionStorage.getItem("itemsInCart");
-        if(currentItems != null) {
-            sessionStorage.setItem("itemsInCart", currentItems + ";" + name);
-        } else {
-            sessionStorage.setItem("itemsInCart", name);
-        }
-
         sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
-
         window.location = "index.html";
         setJahreszeit(jahreszeit);
     }
 }
 
+// Setzt die aktuelle Jahreszeit für die entsprechende Kleiderauswahl
+// input: jahreszeit: int im Bereich von LEN(jahreszeiten)
 function setJahreszeit(jahreszeit) {
     this.lilaJacke = false;
     //Auswahlmenü Reseten
@@ -42,6 +35,7 @@ function setJahreszeit(jahreszeit) {
     this.jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
     // Grundbild der entsprechenden Person anzeigen
     showBasicPerson()
+    console.log(getCountOfItemsInChart());
 }
 
 // Wertet die aktuelle Mausposition über der Figur aus
@@ -267,6 +261,18 @@ function GetCoordinates(e) {
   Pos[0] = e.pageX - ImgPos[0];
   Pos[1] = e.pageY - ImgPos[1];
   return Pos;
+}
+
+//Gibt die Anzahl an Produkten zurück, welche sich im Einkaufswagen befinden.
+function getCountOfItemsInChart() {
+    let currentItems = sessionStorage.getItem("itemsInCart");
+    if (currentItems == null) {
+        return 0;
+    } else {
+        var count = (currentItems.match(/;/g) || []).length;
+        count += 1;
+        return count;
+    }
 }
 
 // Auswahl in der Detailansicht
