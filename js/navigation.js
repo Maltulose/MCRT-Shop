@@ -199,8 +199,11 @@ function showBasicPerson() {
 }
 
 // Funktionen zum aufrufen der anderen Seiten
-function openDetailansicht(){
-    window.location = "detailansicht.html";
+function openDetailansicht() {
+    let pfad = document.getElementById("IVperson").src
+    if (pfad.includes("pictures/regen/regen_Colored_Jacke.png")) {
+        window.location = "detailansicht.html";
+    }
 }
 function openIndex(){
     window.location = "index.html";
