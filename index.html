@@ -122,7 +122,7 @@
         position: absolute;
         top: -4px;
         right: 16px;
-        color: blue;
+        color: green;
 }
     
      /* For mobile phones: */
@@ -149,6 +149,8 @@
     var jahreszeiten = ["sommer", "winter", "regen"]; // Alle 3 Verfügbaren Jahreszeiten
 
     function mainMenu(jahreszeit) {
+        document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
+
         currentItems = sessionStorage.getItem("ausgewähltesWetter");
         if (currentItems != null) {
             jahreszeit = currentItems;
@@ -170,12 +172,12 @@
             <div class="desktop-2-cols logo">
                 <img src="pictures/kategorien/logo.png" alt="Bild vom Logo der Webseite, führt zurück zur Startseite" title="Startseite" tabindex="0" onkeypress="openIndex()" onmouseup="openIndex()"/>
             </div>
-            <div class="desktop-9-cols centerBox">
+            <div class="desktop-8-cols centerBox">
                 
             </div>
-            <div class="desktop-1-cols shoppingCart">
-                    <img src="pictures/kategorien/einkaufswagen.svg" alt="Bild von einem Einkaufswagen, öffnet den Warenkorb" title="Einkaufswagen" style="float: right; height: 100%;" tabindex="0" onkeypress="openShoppingCart()" onmouseup="openShoppingCart()">
-                    <h1 class="top-right">1</h1>
+            <div class="desktop-2-cols shoppingCart">
+                <img src="pictures/kategorien/einkaufswagen.svg" alt="Bild von einem Einkaufswagen, öffnet den Warenkorb" title="Einkaufswagen" style="float: right; height: 100%;" tabindex="0" onkeypress="openShoppingCart()" onmouseup="openShoppingCart()">
+                <h1 id="TVnumberOfItemsInCart"></h1>
             </div>
         </div>
 

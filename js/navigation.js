@@ -35,7 +35,6 @@ function setJahreszeit(jahreszeit) {
     this.jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
     // Grundbild der entsprechenden Person anzeigen
     showBasicPerson()
-    console.log(getCountOfItemsInChart());
 }
 
 // Wertet die aktuelle Mausposition über der Figur aus
@@ -234,6 +233,8 @@ function addToCart(name) {
     } else {
         sessionStorage.setItem("itemsInCart", name);
     }
+
+    document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
 }
 
 // Position eines Elements auf der Seite

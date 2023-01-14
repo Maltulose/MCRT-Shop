@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <title>GMCI-Shop</title>
 <style>
     /*erstellen von Rechtecken und sowas */
     
@@ -139,15 +140,20 @@
 <script>
     var jahreszeiten = ["sommer", "winter", "regen"];  // Names of the elements
 
+    
     function mainMenu(jahreszeit) {
         document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
+        document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
     }
+
+    
+
 </script>
 
 
 </head>
-<title>GMCI-Shop</title>
-<body onload="mainMenu(jahreszeiten[2]); setJahreszeit(jahreszeiten[2])">
+
+<body onload="mainMenu(jahreszeiten[2]); setJahreszeit(jahreszeiten[2]);">
 
     <script src="js/navigation.js"></script>
 
@@ -156,11 +162,12 @@
             <div class="desktop-2-cols logo">
                 <img src="pictures/kategorien/logo.png" onmouseup="openIndex()"/>
             </div>
-            <div class="desktop-9-cols centerBox">
+            <div class="desktop-8-cols centerBox">
                 
             </div>
-            <div class="desktop-1-cols shoppingCart">
+            <div class="desktop-2-cols shoppingCart">
                 <img src="pictures/kategorien/einkaufswagen.svg" style="float: right; height: 100%;" onmouseup="openShoppingCart()">
+                <h1 id="TVnumberOfItemsInCart"></h1>
             </div>
         </div>
 

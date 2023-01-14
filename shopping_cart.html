@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <title>GMCI-Shop</title>
 <style>
     /*erstellen von Rechtecken und sowas */
     
@@ -140,6 +141,8 @@
 function populateShoppingCart() {
     var data = sessionStorage.getItem("itemsInCart");
     var table = document.getElementById("content_table");
+    document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
+
     if (data != null) {
         var total_price = 0;
         data = data.split(";");
@@ -192,7 +195,6 @@ function placeOrder() {
 </script>
 
 </head>
-<title>GMCI-Shop</title>
 <body onload="populateShoppingCart()">
 
     <script src="js/navigation.js"></script>
@@ -200,13 +202,14 @@ function placeOrder() {
     <div class="row">
         <div class="flex-container">
             <div class="desktop-2-cols logo">
-                <img src="pictures/kategorien/logo.png" alt="Bild vom Logo der Webseite, führt zurück zur Startseite" title="Startseite" tabindex=0 onkeypress="openIndex()" onmouseup="openIndex()"/>
+                <img src="pictures/kategorien/logo.png" alt="Bild vom Logo der Webseite, führt zurück zur Startseite" title="Startseite" tabindex="0" onkeypress="openIndex()" onmouseup="openIndex()"/>
             </div>
-            <div class="desktop-9-cols centerBox">
+            <div class="desktop-8-cols centerBox">
                 
             </div>
-            <div class="desktop-1-cols shoppingCart">
+            <div class="desktop-2-cols shoppingCart">
                 <img src="pictures/kategorien/einkaufswagen.svg" alt="Bild von einem Einkaufswagen, Einkaufswagen ist bereits geöffnet" title="Einkaufswagen" style="float: right; height: 100%;">
+                <h1 id="TVnumberOfItemsInCart"></h1>
             </div>
         </div>
 
