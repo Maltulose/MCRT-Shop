@@ -11,6 +11,26 @@ var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "
 
 // Setzt die aktuelle Jahreszeit für die entsrepchende Kleiderauswahl
 // input: jahreszeit: int im Bereich von LEN(jahreszeiten)
+
+
+function setJahreszeitAndGoToMainPage(jahreszeit) {
+    //Nur dann in eine andere Jahreszeit springen, wenn sie nicht gleich der aktuellen Jahreszeit ist.
+    if (jahreszeiten[this.jahreszeit] != jahreszeit) {
+
+        currentItems = sessionStorage.getItem("itemsInCart");
+        if(currentItems != null) {
+            sessionStorage.setItem("itemsInCart", currentItems + ";" + name);
+        } else {
+            sessionStorage.setItem("itemsInCart", name);
+        }
+
+        sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
+
+        window.location = "index.html";
+        setJahreszeit(jahreszeit);
+    }
+}
+
 function setJahreszeit(jahreszeit) {
     this.lilaJacke = false;
     //Auswahlmenü Reseten

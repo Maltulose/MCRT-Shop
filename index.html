@@ -142,11 +142,19 @@
     var jahreszeiten = ["sommer", "winter", "regen"]; // Alle 3 Verfügbaren Jahreszeiten
 
     function mainMenu(jahreszeit) {
+        currentItems = sessionStorage.getItem("ausgewähltesWetter");
+        if (currentItems != null) {
+            jahreszeit = currentItems;
+            this.jahreszeit = jahreszeiten.findIndex(element => element == jahreszeit);
+            sessionStorage.removeItem("ausgewähltesWetter");
+        }
+
         document.getElementById("BT" + jahreszeit).style.backgroundColor = "#04AA6D";
+        showBasicPerson();
     }
 </script>
 </head>
-<body onload="mainMenu(jahreszeiten[0])">
+<body onload="mainMenu(jahreszeiten[jahreszeit])">
 
     <script src="js/navigation.js"></script>
 
@@ -184,7 +192,7 @@
                 
             </div>
             <div class="desktop-9-cols img">
-                <img id="IVperson" src="pictures/sommer/Sommer_colored.png" alt="Bild einer Person, die Sommerkleidung trägt. Zu sehen ist eine Schirmmütze, eine Sonnenbrille, ein T-Shirt, eine kurze Hose und Flipflops. Durch klicken auf das jeweilige Objekt wird eine Auswahl diesen Typs angezeigt." title="Wähle durch Klicken einen Typ von Kleidung aus." onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true" onmouseup="openDetailansicht()"/>
+                <img id="IVperson" alt="Bild einer Person, die Sommerkleidung trägt. Zu sehen ist eine Schirmmütze, eine Sonnenbrille, ein T-Shirt, eine kurze Hose und Flipflops. Durch klicken auf das jeweilige Objekt wird eine Auswahl diesen Typs angezeigt." title="Wähle durch Klicken einen Typ von Kleidung aus." onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true" onmouseup="openDetailansicht()"/>
             </div>
             <div class="desktop-3-cols">
 
