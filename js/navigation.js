@@ -227,12 +227,13 @@ function openShoppingCart() {
 }
 
 // hinzufügen eines Artikels zum Warenkorb
-function addToCart(name, groesse) {
+function addToCart(name, size) {
     currentItems = sessionStorage.getItem("itemsInCart");
+    appendItem = name + "," + size;
     if(currentItems != null) {
-        sessionStorage.setItem("itemsInCart", currentItems + ";" + name);
+        sessionStorage.setItem("itemsInCart", currentItems + ";" + appendItem);
     } else {
-        sessionStorage.setItem("itemsInCart", name);
+        sessionStorage.setItem("itemsInCart", appendItem);
     }
 
     document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();

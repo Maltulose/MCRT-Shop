@@ -138,9 +138,14 @@
     }
 </style>
 <script>
+var lastRemoved;
 function populateShoppingCart() {
     var data = sessionStorage.getItem("itemsInCart");
     var table = document.getElementById("content_table");
+    if(table == null) {
+        document.getElementById("cart_contents").innerHTML = `<table id="content_table"></table>`
+        table = document.getElementById("content_table");
+    }
     document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
 
     if (data != null) {
@@ -151,31 +156,49 @@ function populateShoppingCart() {
         row.style = "border-top-width: 0px; border-right-width: 0px !important; border-bottom-width: 5px; border-left-width: 0px !important; border-style: solid;";
         var quantity = row.insertCell();
         quantity.innerHTML = "Anzahl";
+        quantity.style = "text-align:center";
+        var size = row.insertCell();
+        size.innerHTML = "Größe";
+        size.style = "text-align:center";
         var listing_name = row.insertCell();
         listing_name.innerHTML = "Name des Objekts";
-        listing_name.style = "width: 600px; text-align:center";
+        listing_name.style = "width: auto; text-align: center; padding-left: 20px !important; padding-right: 20px !important;";
+        var picCell = row.insertCell();
         var price = row.insertCell();
         price.innerHTML = "Preis";
+        var removeButton = row.insertCell();
 
         table.style = "padding: 20px; border-collapse: collapse; margin-top: 20px !important;";
         data.forEach(element => {
+            element_split = element.split(",");
             var row = table.insertRow();
             row.style = "border-top-width: 1px; border-right-width: 0px !important; border-bottom-width: 1px; border-left-width: 0px !important; border-style: solid;";
             quantity = row.insertCell();
             quantity.innerHTML = "1";
-            quantity.style = "text-align: center";
+            quantity.style = "text-align:center; width:100px;";
+            size = row.insertCell();
+            size.innerHTML = element_split[1];
+            size.style = "text-align:center; width:100px;";
             listing_name = row.insertCell();
-            listing_name.innerHTML = element;
-            listing_name.style = "width: 600px; text-align:center";
+            listing_name.innerHTML = element_split[0];
+            listing_name.style = "width: auto; text-align:center";
+            picture = row.insertCell();
+            picture.style = "width:auto; text-align:center;"
+            picture.innerHTML = "<img src=\"pictures/sale/sale_Colored_lila_Jacke_klein.png\" height=\"100px\">";
             price = row.insertCell();
             price.innerHTML = "129€";
             total_price += 129;
             price.style = "text-align: left";
+            removeButton = row.insertCell();
+            removeButton.innerHTML =`<button onclick="removeFromCart('${element_split[0]}', '${element_split[1]}')">Entfernen</button>`
         });
         row = table.insertRow();
         row.insertCell();
         row.insertCell();
+        row.insertCell();
+        row.insertCell();
         total = row.insertCell();
+        row.insertCell();
         total.innerHTML = total_price + "€";
         table.rows[table.rows.length - 1].style = "border-top-width: 5px; border-right-width: 0px !important; border-bottom-width: 0px; border-left-width: 0px !important; border-style: solid;";
 
@@ -183,6 +206,13 @@ function populateShoppingCart() {
     } else {
         var listing = document.getElementById("cart_contents");
         listing.innerHTML = "Keine Artikel im Einkaufswagen";
+        document.getElementById("buy_button").style = "display:none";
+    }
+    if(lastRemoved != null) {
+        removeContainer = document.getElementById("last_removed");
+        removeContainer.innerHTML = `<button onclick="addToCart('${lastRemoved[0]}', '${lastRemoved[1]}'); nukeTable(); populateShoppingCart(); hideRemoveContainer();" style="font-size:16px">${lastRemoved[0]} in der Größe ${lastRemoved[1]} wieder hinzufügen</button>`
+        lastRemoved = null;
+        removeContainer.style = "align-items: center; justify-content: center; display:flex;"
     }
 }
 
@@ -191,6 +221,43 @@ function placeOrder() {
     sessionStorage.removeItem("itemsInCart");
     populateShoppingCart();
     document.getElementById("buy_button").style = "display:none";
+}
+
+function removeFromCart(name, size) {
+    searchString = name + "," + size;
+    currentItems = sessionStorage.getItem("itemsInCart").split(";");
+    index = currentItems.indexOf(searchString);
+    currentItems.splice(index, 1);
+    var cleanedCart = currentItems;
+    if(currentItems.length > 1) {
+        cleanedCart = currentItems.reduce(concatString, "");
+    }
+    if(cleanedCart == "") {
+        sessionStorage.removeItem("itemsInCart");
+    } else {
+        sessionStorage.setItem("itemsInCart", cleanedCart);
+    }
+    lastRemoved = searchString.split(",");
+    nukeTable();
+    populateShoppingCart();
+}
+
+function concatString(current, toAdd) {
+    if(current == "") {
+        return toAdd;
+    }
+    return current + ";" + toAdd;
+}
+
+function hideRemoveContainer() {
+    document.getElementById("last_removed").style = "display:none";
+}
+
+function nukeTable() {
+    table = document.getElementById("content_table");
+    if(table != null) {
+        document.getElementById("content_table").remove();
+    }
 }
 </script>
 
@@ -217,7 +284,8 @@ function placeOrder() {
             <div class="desktop-12-cols" id="cart_contents" style="align-items: center; justify-content: center; display:flex;">
                 <table id="content_table"></table>
             </div>
-            <button onclick="placeOrder()" style="display:none" id="buy_button">Kaufen</button>
+            <div class="desktop-12-cols" id="last_removed" style="display:none;"></div>
+            <button onclick="placeOrder()" style="display:none" id="buy_button">Kostenpflichtig bestellen</button>
         </div>
         <div class="col-12 footer">
             <p>C. Hagemeyer, R. Gieseke, M. Herrmann, T. Schockemöhle</p>
