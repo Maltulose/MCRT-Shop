@@ -320,6 +320,7 @@ function saleAuswahl(e) {
                 addToCart("Regenjacke lila", this.groessenAuswahl);
                 this.saleFenster=false;
                 this.imAuswahlFenster=true;
+                this.groesseGesetzt = false;
                 // 2 sekunden warten dann wechseln
                 setTimeout(() => { 
                     document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Auswahl.png";
