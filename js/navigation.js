@@ -18,11 +18,9 @@ var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "
 // input: jahreszeit: int im Bereich von LEN(jahreszeiten)
 function setJahreszeitAndGoToMainPage(jahreszeit) {
     //Nur dann in eine andere Jahreszeit springen, wenn sie nicht gleich der aktuellen Jahreszeit ist.
-    if (jahreszeiten[this.jahreszeit] != jahreszeit) {
-        sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
-        window.location = "index.html";
-        setJahreszeit(jahreszeit);
-    }
+    sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
+    window.location = "index.html";
+    setJahreszeit(jahreszeit);
 }
 
 // Setzt die aktuelle Jahreszeit für die entsprechende Kleiderauswahl
@@ -302,7 +300,7 @@ function saleAuswahl(e) {
         }
         // Cancel
         if ((Pos_X[0]*img_width < Pos[0]) && (Pos[0] < Pos_X[1]*img_width) && (Pos_X[2]*img_height < Pos[1]) && (Pos[1]< Pos_X[3]*img_height)) { 
-            openIndex();
+            setJahreszeitAndGoToMainPage(this.jahreszeiten[this.jahreszeit]);
         }
 
     } else if (this.saleFenster==true){ 
