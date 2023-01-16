@@ -309,8 +309,14 @@ function saleAuswahl(e) {
         // Warenkorb
         if ((Pos_shoppingCart[0]*img_width < Pos[0]) && (Pos[0] < Pos_shoppingCart[1]*img_width) && (Pos_shoppingCart[2]*img_height < Pos[1]) && (Pos[1]< Pos_shoppingCart[3]*img_height)) {
             if (groesseGesetzt) {
-                document.getElementById("SaleAuswahl").src = "pictures/sale/sale_finished.png";
+                document.getElementById("SaleAuswahl").src = "pictures/sale/sale_finished.png"; 
                 addToCart("Regenjacke lila");
+                this.saleFenster=false;
+                this.imAuswahlFenster=true;
+                // 2 sekunden warten dann wechseln
+                setTimeout(() => { 
+                    document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Auswahl.png";
+                }, 1000);               
             } else {
                 alert("Wählen Sie zunächst eine Größe aus!")
             }
@@ -336,9 +342,5 @@ function saleAuswahl(e) {
             this.saleFenster=false;
             this.imAuswahlFenster=true;
         }
-
-    }
-    
-
-    
+    }  
 }
