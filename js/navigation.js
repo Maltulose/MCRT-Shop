@@ -5,6 +5,7 @@ var lilaJacke = false; //verhindert, dass lila Jacke durch Mouseover verändert 
 var imAuswahlFenster = true;
 var imSaleFenster = false;
 var groesseGesetzt = false;
+var groessenAuswahl = "";
 var personenJahreszeiten = ["Sommer_colored.png", "Winter_colored.png", "Regen_Colored_1.png"];  // Grundbilder von der Person
 
 var koerperregionenX = ["Links", "Mitte", "Rechts"] //Koordinatenfeld über die Person in X-Richtung
@@ -228,7 +229,7 @@ function openShoppingCart() {
 }
 
 // hinzufügen eines Artikels zum Warenkorb
-function addToCart(name) {
+function addToCart(name, groesse) {
     currentItems = sessionStorage.getItem("itemsInCart");
     if(currentItems != null) {
         sessionStorage.setItem("itemsInCart", currentItems + ";" + name);
@@ -288,8 +289,10 @@ function saleAuswahl(e) {
     if (this.imAuswahlFenster==true){
         var Pos_lilaJacke = [533, 723, 232, 368];
         var img_lilaJacke = [800, 600];
+        var Pos_X = [744, 797, 3, 55];
         img_width = img_width/img_lilaJacke[0];
         img_height = img_height/img_lilaJacke[1];
+        // lila Jacke
         if ((Pos_lilaJacke[0]*img_width < Pos[0]) && (Pos[0] < Pos_lilaJacke[1]*img_width) && (Pos_lilaJacke[2]*img_height < Pos[1]) && (Pos[1]< Pos_lilaJacke[3]*img_height)) {
             this.lilaJacke = true;
             document.getElementById("IVperson").src = "pictures/regen/regen_Colored_lila_Jacke_mit_grau.png";
@@ -297,6 +300,11 @@ function saleAuswahl(e) {
             this.saleFenster=true;
             this.imAuswahlFenster=false;
         }
+        // Cancel
+        if ((Pos_X[0]*img_width < Pos[0]) && (Pos[0] < Pos_X[1]*img_width) && (Pos_X[2]*img_height < Pos[1]) && (Pos[1]< Pos_X[3]*img_height)) { 
+            openIndex();
+        }
+
     } else if (this.saleFenster==true){ 
         var Pos_S = [345, 395, 370, 414];
         var Pos_M = [405, 453, 370, 414];
@@ -310,7 +318,7 @@ function saleAuswahl(e) {
         if ((Pos_shoppingCart[0]*img_width < Pos[0]) && (Pos[0] < Pos_shoppingCart[1]*img_width) && (Pos_shoppingCart[2]*img_height < Pos[1]) && (Pos[1]< Pos_shoppingCart[3]*img_height)) {
             if (groesseGesetzt) {
                 document.getElementById("SaleAuswahl").src = "pictures/sale/sale_finished.png"; 
-                addToCart("Regenjacke lila");
+                addToCart("Regenjacke lila", this.groessenAuswahl);
                 this.saleFenster=false;
                 this.imAuswahlFenster=true;
                 // 2 sekunden warten dann wechseln
@@ -324,16 +332,19 @@ function saleAuswahl(e) {
         // Groesse S
         if ((Pos_S[0]*img_width < Pos[0]) && (Pos[0] < Pos_S[1]*img_width) && (Pos_S[2]*img_height < Pos[1]) && (Pos[1]< Pos_S[3]*img_height)) {
             document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Colored_lila_Jacke_S.png";
+            groessenAuswahl = "S";
             groesseGesetzt = true;
         } 
         // Groesse M
         if ((Pos_M[0]*img_width < Pos[0]) && (Pos[0] < Pos_M[1]*img_width) && (Pos_M[2]*img_height < Pos[1]) && (Pos[1]< Pos_M[3]*img_height)) { 
             document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Colored_lila_Jacke_M.png";
+            groessenAuswahl = "M";
             groesseGesetzt = true;
         } 
         // Groesse L
         if ((Pos_L[0]*img_width < Pos[0]) && (Pos[0] < Pos_L[1]*img_width) && (Pos_L[2]*img_height < Pos[1]) && (Pos[1]< Pos_L[3]*img_height)) { 
             document.getElementById("SaleAuswahl").src = "pictures/sale/sale_Colored_lila_Jacke_L.png";
+            groessenAuswahl = "L";
             groesseGesetzt = true;
         } 
         // Cancel

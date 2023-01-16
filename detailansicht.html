@@ -101,6 +101,14 @@
     border-right: 3px solid #4f99df;
     }
 
+    .rightBox {
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-right: 3px solid #4f99df;    
+    }
+
     img {
     max-width: 100%;
     max-height: 100%;
@@ -182,7 +190,7 @@
                     <a id="BTregen" onclick="setJahreszeitAndGoToMainPage(jahreszeiten[2])"><img src="pictures/kategorien/rainy.svg"></a>
                   </div>
             </div>
-            <div class="desktop-1-cols">
+            <div class="desktop-1-cols rightBox">
 
             </div>
         </div>
@@ -194,9 +202,13 @@
             <div class="desktop-3-cols">
                 <img id="IVperson" src="pictures/regen/regen_Colored_1.png" onmousemove="onMausUeberDerPerson(event)" onmouseout="showBasicPerson()" onmouseenter="mausIstAufDerPerson = true"/>
             </div>
-            <div class="desktop-6-cols"> 
+            <div class="desktop-5-cols"> 
                 <img id="SaleAuswahl" src="pictures/sale/sale_Auswahl.png" onmouseup="saleAuswahl(event)"/>
             </div>
+            <div class="desktop-2-cols rightBox">
+
+            </div>
+
         </div>
         <div class="col-12 footer">
             <p>C. Hagemeyer, R. Gieseke, M. Herrmann, T. Schockemöhle</p>
