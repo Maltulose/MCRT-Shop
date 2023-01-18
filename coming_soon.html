@@ -158,6 +158,9 @@
 
         document.getElementById("BT" + jahreszeiten[jahreszeit]).style.backgroundColor = "#04AA6D";
         document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
+
+        var pfadSoonPicture = "pictures/" + jahreszeiten[jahreszeit] + "/" + jahreszeiten[jahreszeit] + "_colored_grau_soon.png"
+        document.getElementById("IVcomingSoon").src = pfadSoonPicture
     }
 </script>
 
@@ -203,7 +206,7 @@
                 
             </div>
             <div class="desktop-3-cols">
-                <img src="pictures/regen/regen_Colored_1.png"/>
+                <img id="IVcomingSoon"/>
             </div>
             <div class="desktop-5-cols"> 
                 <h1>Die Kleidung wird später in den Shop aufgenommen... Coming soon</h1>
