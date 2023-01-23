@@ -165,7 +165,7 @@ function populateShoppingCart() {
         listing_name.style = "width: auto; text-align: center; padding-left: 20px !important; padding-right: 20px !important;";
         var picCell = row.insertCell();
         var price = row.insertCell();
-        price.innerHTML = "Preis pro Stück";
+        price.innerHTML = "Preis";
         price.style = "text-align:center";
         var removeButton = row.insertCell();
 
@@ -189,7 +189,7 @@ function populateShoppingCart() {
             picture.style = "width:auto; text-align:center;"
             picture.innerHTML = "<img src=\"pictures/sale/sale_Colored_lila_Jacke_klein.png\" height=\"100px\">";
             price = row.insertCell();
-            price.innerHTML = "129€";
+            price.innerHTML = parseInt(element_split[2]) * 129 + "€";
             total_price += parseInt(element_split[2]) * 129;
             price.style = "text-align: center";
             removeButton = row.insertCell();
