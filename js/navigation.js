@@ -231,12 +231,31 @@ function addToCart(name, size) {
     currentItems = sessionStorage.getItem("itemsInCart");
     appendItem = name + "," + size;
     if(currentItems != null) {
-        sessionStorage.setItem("itemsInCart", currentItems + ";" + appendItem);
+        splitItems = currentItems.split(";");
+        // for each search for item
+        for(i = 0; i < splitItems.length; i++) {
+            itemInformation = splitItems[i].toString().split(",");
+            if((itemInformation[0] + "," + itemInformation[1]) == appendItem) {
+                newItemString = appendItem + "," + (parseInt(itemInformation[2]) + 1);
+                splitItems[i] = newItemString;
+                sessionStorage.setItem("itemsInCart", splitItems.reduce(concatString, ""));
+                return;
+            }
+        }
+        splitItems.push(appendItem + ",1");
+        sessionStorage.setItem("itemsInCart", splitItems.reduce(concatString, ""));
     } else {
-        sessionStorage.setItem("itemsInCart", appendItem);
+        sessionStorage.setItem("itemsInCart", appendItem + ",1");
     }
 
     document.getElementById("TVnumberOfItemsInCart").innerHTML = getCountOfItemsInChart();
+}
+
+function concatString(current, toAdd) {
+    if(current == "") {
+        return toAdd;
+    }
+    return current + ";" + toAdd;
 }
 
 // Position eines Elements auf der Seite
@@ -272,8 +291,12 @@ function getCountOfItemsInChart() {
     if (currentItems == null) {
         return 0;
     } else {
-        var count = (currentItems.match(/;/g) || []).length;
-        count += 1;
+        count = 0;
+        splitItem = currentItems.split(";");
+        for(var counter = 0; counter < splitItem.length; counter++) {
+            itemInformation = splitItem[counter].split(",");
+                count += parseInt(itemInformation[2]);
+        }
         return count;
     }
 }

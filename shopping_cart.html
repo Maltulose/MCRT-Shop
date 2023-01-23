@@ -174,7 +174,9 @@ function populateShoppingCart() {
             var row = table.insertRow();
             row.style = "border-top-width: 1px; border-right-width: 0px !important; border-bottom-width: 1px; border-left-width: 0px !important; border-style: solid;";
             quantity = row.insertCell();
-            quantity.innerHTML = "1";
+            plusButtonString = `<button onclick="addToCart('${element_split[0]}', '${element_split[1]}'); nukeTable(); populateShoppingCart();" id="plus_button">+</button>`;
+            minusButtonString = `<button onclick="removeFromCart('${element_split[0]}', '${element_split[1]}', ${element_split[2]}, ${1})" id="minus_button">-</button>`
+            quantity.innerHTML = minusButtonString + element_split[2] + plusButtonString;
             quantity.style = "text-align:center; width:100px;";
             size = row.insertCell();
             size.innerHTML = element_split[1];
@@ -190,7 +192,7 @@ function populateShoppingCart() {
             total_price += 129;
             price.style = "text-align: left";
             removeButton = row.insertCell();
-            removeButton.innerHTML =`<button onclick="removeFromCart('${element_split[0]}', '${element_split[1]}')">Entfernen</button>`
+            removeButton.innerHTML =`<button onclick="removeFromCart('${element_split[0]}', '${element_split[1]}', ${element_split[2]}, ${element_split[2]})">Entfernen</button>`
         });
         row = table.insertRow();
         row.insertCell();
@@ -210,7 +212,7 @@ function populateShoppingCart() {
     }
     if(lastRemoved != null) {
         removeContainer = document.getElementById("last_removed");
-        removeContainer.innerHTML = `<button onclick="addToCart('${lastRemoved[0]}', '${lastRemoved[1]}'); nukeTable(); populateShoppingCart(); hideRemoveContainer();" style="font-size:16px">${lastRemoved[0]} in der Größe ${lastRemoved[1]} wieder hinzufügen</button>`
+        removeContainer.innerHTML = `<button onclick="addToCartSpecificAmount('${lastRemoved[0]}', '${lastRemoved[1]}', ${lastRemoved[2]}); nukeTable(); populateShoppingCart(); hideRemoveContainer();" style="font-size:16px">${lastRemoved[2]} mal ${lastRemoved[0]} in der Größe ${lastRemoved[1]} wieder hinzufügen</button>`
         lastRemoved = null;
         removeContainer.style = "align-items: center; justify-content: center; display:flex;"
     }
@@ -223,30 +225,38 @@ function placeOrder() {
     document.getElementById("buy_button").style = "display:none";
 }
 
-function removeFromCart(name, size) {
-    searchString = name + "," + size;
-    currentItems = sessionStorage.getItem("itemsInCart").split(";");
-    index = currentItems.indexOf(searchString);
-    currentItems.splice(index, 1);
-    var cleanedCart = currentItems;
+function addToCartSpecificAmount(name, size, quantity) {
+    for(var counter = 0; counter < parseInt(quantity); counter++) { //strangely the counting variable i doesn't work here and I don't know why
+        addToCart(name, size);
+    }
+}
+
+function removeFromCart(name, size, quantityInCart, quantityToRemove) {
+    var searchString = name + "," + size + "," + quantityInCart;
+    var currentItems = sessionStorage.getItem("itemsInCart").split(";");
+    var index = currentItems.indexOf(searchString);
+    if(quantityToRemove == 1 && quantityInCart > 1) {
+        var itemInformation = currentItems[index].toString().split(",");
+        currentItems[index] = itemInformation[0] + "," + itemInformation[1] + "," + (quantityInCart - quantityToRemove);
+    }
+    else {
+        currentItems.splice(index, 1);
+    }
+
+    var cleanedCart = currentItems
     if(currentItems.length > 1) {
         cleanedCart = currentItems.reduce(concatString, "");
     }
     if(cleanedCart == "") {
         sessionStorage.removeItem("itemsInCart");
-    } else {
+    }
+    else {
         sessionStorage.setItem("itemsInCart", cleanedCart);
     }
-    lastRemoved = searchString.split(",");
+    var removedString = name + "," + size + "," + quantityToRemove;
+    lastRemoved = removedString.split(",");
     nukeTable();
     populateShoppingCart();
-}
-
-function concatString(current, toAdd) {
-    if(current == "") {
-        return toAdd;
-    }
-    return current + ";" + toAdd;
 }
 
 function hideRemoveContainer() {
