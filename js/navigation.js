@@ -15,7 +15,7 @@ var koerperregionenY = ["KopfOben", "KopfMitte", "KopfUnten", "Bauch", "Hose", "
 
 
 // Setzt die aktuelle Jahreszeit für die entsprechende Kleiderauswahl und geht zurück zur Hauptseite
-// input: jahreszeit: int im Bereich von LEN(jahreszeiten)
+// input: jahreszeit: string im Bereich von LEN(jahreszeiten)
 function setJahreszeitAndGoToMainPage(jahreszeit) {
     //Nur dann in eine andere Jahreszeit springen, wenn sie nicht gleich der aktuellen Jahreszeit ist.
     sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
@@ -24,7 +24,7 @@ function setJahreszeitAndGoToMainPage(jahreszeit) {
 }
 
 // Setzt die aktuelle Jahreszeit für die entsprechende Kleiderauswahl
-// input: jahreszeit: int im Bereich von LEN(jahreszeiten)
+// input: jahreszeit: string mit den Werten von jahreszeiten[]
 function setJahreszeit(jahreszeit) {
     this.lilaJacke = false;
     //Auswahlmenü Reseten
@@ -217,6 +217,9 @@ function openDetailansicht() {
     let pfad = document.getElementById("IVperson").src
     if (pfad.includes("pictures/regen/regen_Colored_Jacke.png")) {
         window.location = "detailansicht.html";
+    } else {
+        sessionStorage.setItem("ausgewähltesWetter", jahreszeit);
+        window.location = "coming_soon.html";
     }
 }
 function openIndex(){
